@@ -72,7 +72,7 @@ FB.provide('Loader', {
    * @private
    */
  _resourceUrl: function(included, excluded) {
-    return FB._domain.cdn +
+    return FB._domain.cdn_code +
      'dynamic_loader/' + // TODO: doesn't exist yet
      '?comps=' + included.join(',') +
      '&exclude=' + excluded.join(',');

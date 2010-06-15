@@ -72,7 +72,7 @@ FB.provide('Flash', {
     // create the swf
     var
       IE   = !!document.attachEvent,
-      swf  = FB._domain.cdn + FB.Flash._swfPath,
+      swf  = FB._domain.cdn_code + FB.Flash._swfPath,
       html = (
         '<object ' +
           'type="application/x-shockwave-flash" ' +

@@ -58,7 +58,7 @@ FB.subclass('XFBML.ProfilePic', 'XFBML.Element', null, {
 
       if (!imgSrc) {
         // Create default
-        imgSrc = FB._domain.cdn + FB.XFBML.ProfilePic._defPicMap[picFieldName];
+        imgSrc = FB._domain.cdn_pics + FB.XFBML.ProfilePic._defPicMap[picFieldName];
       }
       // Copy width, height style, and class name of fb:profile-pic down to the
       // image element we create

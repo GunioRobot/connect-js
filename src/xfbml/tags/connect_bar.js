@@ -148,7 +148,7 @@ FB.subclass('XFBML.ConnectBar', 'XFBML.Element', null, {
         '<a href="#" class="fb_no_thanks">{0}</a>' +
       '</span>',
       FB.Intl.tx('connect-bar:no-thanks'),
-      FB._domain.cdn + FB.XFBML.ConnectBar.imgs.buttonUrl,
+      FB._domain.cdn_pics + FB.XFBML.ConnectBar.imgs.buttonUrl,
       FB.Intl.tx('connect-bar:close'),
       info[this._picFieldName],
       info.first_name,

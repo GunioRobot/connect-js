@@ -131,7 +131,7 @@ FB.provide('XD', {
     // of before the fragment as a query string
     // FIXME
     var
-      xdProxy = FB._domain.cdn + 'connect/xd_proxy.php#?=&',
+      xdProxy = FB._domain.cdn_code + 'connect/xd_proxy.php#?=&',
       id = FB.guid();
 
     // in fragment mode, the url is the current page and a fragment with a
