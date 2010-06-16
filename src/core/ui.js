@@ -53,7 +53,7 @@ FB.provide('', {
    *          action_links: [
    *            { text: 'Code', href: 'http://github.com/facebook/connect-js' }
    *          ],
-   *          user_prompt_message: 'Share your thoughts about Connect'
+   *          user_message_prompt: 'Share your thoughts about Connect'
    *        },
    *        function(response) {
    *          if (response && response.post_id) {
@@ -164,7 +164,7 @@ FB.provide('UIServer', {
       id     = FB.guid();
 
     if (!method) {
-      FB.log('"' + params.method + '" is an unknown method.');
+      FB.log('"' + params.method.toLowerCase() + '" is an unknown method.');
       return;
     }
 
@@ -252,10 +252,10 @@ FB.provide('UIServer', {
         : window.screenTop,
       outerWidth = typeof window.outerWidth   != 'undefined'
         ? window.outerWidth
-        : document.body.clientWidth,
+        : document.documentElement.clientWidth,
       outerHeight = typeof window.outerHeight != 'undefined'
         ? window.outerHeight
-        : (document.body.clientHeight - 22),
+        : (document.documentElement.clientHeight - 22), // 22= IE toolbar height
       width    = call.size.width,
       height   = call.size.height,
       left     = parseInt(screenX + ((outerWidth - width) / 2), 10),

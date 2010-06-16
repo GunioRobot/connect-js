@@ -15,7 +15,8 @@
  *
  * @provides fb.xfbml
  * @layer xfbml
- * @requires fb.prelude fb.loader fb.array
+ * @requires fb.prelude
+ *           fb.array
  */
 
 /**
@@ -163,25 +164,44 @@ FB.provide('XFBML', {
         // of objects. post f8, this should be changed to a factory function
         // which would allow the login button to instantiate the Button based
         // tag or Iframe based tag depending on the attribute value.
+        var getBoolAttr = function(attr) {
+            var attr = dom.getAttribute(attr);
+            return (attr && FB.Array.indexOf(
+                      ['true', '1', 'yes', 'on'],
+                      attr.toLowerCase()) > -1);
+        }
+
+        var isLogin = false;
+        var showFaces = true;
+        var renderInIframe = false;
         if (tagInfo.className === 'FB.XFBML.LoginButton') {
-          var attr = dom.getAttribute('show-faces');
-          if (attr && FB.Array.indexOf(
-                ['true', '1', 'yes', 'on'], attr.toLowerCase()) > -1) {
+          renderInIframe = getBoolAttr('render-in-iframe');
+          showFaces = getBoolAttr('show-faces');
+          isLogin = renderInIframe || showFaces;
+          if (isLogin) {
             fn = FB.XFBML.Login;
           }
         }
 
         element = dom._element = new fn(dom);
+        if (isLogin) {
+          var extraParams = {show_faces: showFaces};
+          var perms = dom.getAttribute('perms');
+          if (perms) {
+            extraParams['perms'] = perms;
+          }
+          element.setExtraParams(extraParams);
+        }
+
         element.subscribe('render', cb);
         element.process();
+
       };
 
       if (FB.CLASSES[tagInfo.className.substr(3)]) {
         processor();
       } else {
-        // Load on-demand if necessary. Component name is lower case className.
-        var component = tagInfo.className.toLowerCase();
-        FB.Loader.use(component, processor);
+        FB.log('Tag ' + tagInfo.className + ' was not found.');
       }
     }
   },
@@ -252,6 +272,7 @@ FB.provide('XFBML', {
     { localName: 'login',           className: 'FB.XFBML.Login'           },
     { localName: 'login-button',    className: 'FB.XFBML.LoginButton'     },
     { localName: 'facepile',        className: 'FB.XFBML.Facepile'        },
+    { localName: 'friendpile',      className: 'FB.XFBML.Friendpile'      },
     { localName: 'name',            className: 'FB.XFBML.Name'            },
     { localName: 'profile-pic',     className: 'FB.XFBML.ProfilePic'      },
     { localName: 'recommendations', className: 'FB.XFBML.Recommendations' },

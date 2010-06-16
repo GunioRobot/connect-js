@@ -104,11 +104,11 @@ FB.provide('', {
    * : The comma separated permissions string. This is specific to a
    *   permissions call. It is not persistent.
    *
-   * [subscribe]: /docs/?u=facebook.joey.FB.Event.subscribe
-   * [unsubscribe]: /docs/?u=facebook.joey.FB.Event.unsubscribe
-   * [getLoginStatus]: /docs/?u=facebook.joey.FB.getLoginStatus
-   * [login]: /docs/?u=facebook.joey.FB.login
-   * [logout]: /docs/?u=facebook.joey.FB.logout
+   * [subscribe]: /docs/reference/javascript/FB.Event.subscribe
+   * [unsubscribe]: /docs/reference/javascript/FB.Event.unsubscribe
+   * [getLoginStatus]: /docs/reference/javascript/FB.getLoginStatus
+   * [login]: /docs/reference/javascript/FB.login
+   * [logout]: /docs/reference/javascript/FB.logout
    *
    * @access public
    * @param cb {Function} The callback function.
@@ -164,7 +164,7 @@ FB.provide('', {
    * is safer to use [FB.getLoginStatus()][FB.getLoginStatus] if you are
    * unsure.
    *
-   * [FB.getLoginStatus]: /docs/?u=facebook.joey.FB.getLoginStatus
+   * [FB.getLoginStatus]: /docs/reference/javascript/FB.getLoginStatus
    *
    * @access public
    * @return {Object} the current Session if available, `null` otherwise
@@ -221,9 +221,11 @@ FB.provide('', {
    * @param cb {Function} The callback function.
    * @param opts {Object} (_optional_) Options to modify login behavior.
    *
-   * Name   | Type   | Description
-   * ------ | ------ | ------------------------------------------------------
-   * perms  | String | Comma separated list of [[wiki:Extended permissions]].
+   * Name                     | Type    | Description
+   * ------------------------ | ------- | --------------------------------------------------------------------------------
+   * perms                    | String  | Comma separated list of [Extended permissions](/docs/authentication/permissions)
+   * enable_profile_selector  | Boolean | When true, prompt the user to grant permission for one or more Pages.
+   * profile_selector_ids     | String  | Comma separated list of IDs to display in the profile selector.
    */
   login: function(cb, opts) {
     opts = FB.copy({ method: 'auth.login', display: 'popup' }, opts || {});
@@ -331,6 +333,22 @@ FB.provide('Auth', {
       FB.Event.fire('auth.sessionChange', response);
     }
 
+    // re-setup a timer to refresh the session if needed. we only do this if
+    // FB.Auth._loadState exists, indicating that the application relies on the
+    // JS to get and refresh session information (vs managing it themselves).
+    if (FB.Auth._refreshTimer) {
+      window.clearTimeout(FB.Auth._refreshTimer);
+      delete FB.Auth._refreshTimer;
+    }
+    if (FB.Auth._loadState && session && session.expires) {
+      // refresh every 20 minutes. we don't rely on the expires time because
+      // then we would also need to rely on the local time available in JS
+      // which is often incorrect.
+      FB.Auth._refreshTimer = window.setTimeout(function() {
+        FB.getLoginStatus(null, true); // force refresh
+      }, 1200000); // 20 minutes
+    }
+
     return response;
   },
 
@@ -422,7 +440,7 @@ FB.provide('UIServer.Methods', {
         cancel_url              : cancel,
         channel_url             : window.location.toString(),
         next                    : next,
-        fbconnect               : 1,
+        fbconnect               : FB._inCanvas ? 0 : 1,
         req_perms               : call.params.perms,
         enable_profile_selector : call.params.enable_profile_selector,
         profile_selector_ids    : call.params.profile_selector_ids,
@@ -465,7 +483,8 @@ FB.provide('UIServer.Methods', {
         no_session : xdHandler(cb, id, 'parent', false, 'notConnected'),
         no_user    : xdHandler(cb, id, 'parent', false, 'unknown'),
         ok_session : xdHandler(cb, id, 'parent', false, 'connected'),
-        session_version : 3
+        session_version : 3,
+        extern: FB._inCanvas ? 0 : 2
       });
       return call;
     }

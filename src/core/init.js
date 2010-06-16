@@ -108,7 +108,7 @@ FB.provide('', {
    * this method. If you are using an appId, all methods **must** be called
    * after this method.
    *
-   * [FB.ui]: /docs/?u=facebook.joey.FB.ui
+   * [FB.ui]: /docs/reference/javascript/FB.ui
    *
    * @access public
    * @param options {Object}
@@ -125,7 +125,7 @@ FB.provide('', {
   init: function(options) {
     // only need to list values here that do not already have a falsy default.
     // this is why cookie/session/status are not listed here.
-    FB.copy(options, {
+    options = FB.copy(options || {}, {
       logging: true
     });
 

@@ -10,6 +10,7 @@
  *   fb.ui.methods
  *   fb.compat.ui
  *   fb.compat.xfbml
+ *   fb.canvas
  *   fb.xfbml.activity
  *   fb.xfbml.addprofiletab
  *   fb.xfbml.bookmark
@@ -18,6 +19,7 @@
  *   fb.xfbml.element
  *   fb.xfbml.facepile
  *   fb.xfbml.fan
+ *   fb.xfbml.friendpile
  *   fb.xfbml.like
  *   fb.xfbml.likebox
  *   fb.xfbml.livestream

@@ -15,7 +15,7 @@
  *
  * @provides fb.xfbml.facepile
  * @layer xfbml
- * @requires fb.type fb.xfbml.facepile fb.auth
+ * @requires fb.type fb.auth
  */
 
 /**
@@ -27,6 +27,7 @@
  */
 FB.subclass('XFBML.Facepile', 'XFBML.IframeWidget', null, {
   _visibleAfter: 'load',
+  _extraParams: {},
 
   /**
    * Do initial attribute processing.
@@ -36,10 +37,22 @@ FB.subclass('XFBML.Facepile', 'XFBML.IframeWidget', null, {
       channel: this.getChannelUrl(),
       max_rows: this.getAttribute('max-rows'),
       width: this._getPxAttribute('width', 200)
-    };
+     };
+
+    for (var key in this._extraParams) {
+      this._attr[key] = this._extraParams[key];
+    }
 
     return true;
   },
+
+  /**
+   * Sets extra parameters that will be passed to the widget's url.
+   */
+  setExtraParams: function(val) {
+    this._extraParams = val;
+  },
+
 
   /**
    * Setup event handlers.

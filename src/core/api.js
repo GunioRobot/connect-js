@@ -34,7 +34,7 @@
  */
 FB.provide('', {
   /**
-   * Make a API call to the [Graph][Graph] server.
+   * Make a API call to the [Graph API](/docs/api).
    *
    * Server-side calls are available via the JavaScript SDK that allow you to
    * build rich applications that can make API calls against the Facebook
@@ -47,7 +47,7 @@ FB.provide('', {
    * Public data such as [names][names] and [profile pictures][profilepic] are
    * available if you know the id of the user or object. Various parts of the
    * API are available depending on the [connect status and the
-   * permissions][FB.login] the user has granted your application.
+   * permissions](FB.login) the user has granted your application.
    *
    * Except the path, all arguments to this function are optional.
    *
@@ -57,7 +57,7 @@ FB.provide('', {
    *       alert(response.company_overview);
    *     });
    *
-   * If you have an [authenticated user][FB.login], get their **User Object**:
+   * If you have an [authenticated user](FB.login), get their **User Object**:
    *
    *     FB.api('/me', function(response) {
    *       alert(response.name);
@@ -77,9 +77,9 @@ FB.provide('', {
    *       }
    *     });
    *
-   * If you have an [authenticated user][FB.login] with the
-   * [publish_stream][Perms] permission, and want to publish a new story to
-   * their feed:
+   * If you have an [authenticated user](FB.login) with the
+   * [publish_stream](/docs/authentication/permissions) permission, and want
+   * to publish a new story to their feed:
    *
    *     var body = 'Reading Connect JS documentation';
    *     FB.api('/me/feed', 'post', { body: body }, function(response) {
@@ -102,15 +102,15 @@ FB.provide('', {
    *     });
    *
    *
-   * ### Legacy API calls
+   * ### Old REST API calls
    *
-   * This method can also be used to invoke one of the Legacy API calls to
-   * restserver.php documented [here][API]. The function signature for invoking
-   * these Legacy API calls is:
+   * This method can also be used to invoke calls to the
+   * [Old REST API](../rest/). The function signature for invoking REST API
+   * calls is:
    *
    *     FB.api(params, callback)
    *
-   * For example, to invoke [[wiki:Links.getStats]]:
+   * For example, to invoke [links.getStats](../rest/links.getStats):
    *
    *     FB.api(
    *       {
@@ -123,10 +123,6 @@ FB.provide('', {
    *       }
    *     );
    *
-   * [Graph]: https://graph.facebook.com/
-   * [FB.login]: /docs/?u=facebook.joey.FB.login
-   * [Perms]: http://wiki.developers.facebook.com/index.php/Extended_permissions
-   * [API]: http://wiki.developers.facebook.com/index.php/API
    * [names]: https://graph.facebook.com/naitik
    * [profilepic]: https://graph.facebook.com/naitik/picture
    *
@@ -253,7 +249,7 @@ FB.provide('ApiServer', {
       };
     }
 
-    params.format = 'json';
+    params.format = 'json-strings';
     params.api_key = FB._apiKey;
     var domain = FB.ApiServer._readOnlyCalls[method] ? 'api_read' : 'api';
     FB.ApiServer.oauthRequest(domain, 'restserver.php', 'get', params, cb);
@@ -312,7 +308,11 @@ FB.provide('ApiServer', {
     }
     params.callback = 'FB.ApiServer._callbacks.' + g;
 
-    var url = FB._domain[domain] + path + '?' + FB.QS.encode(params);
+    var url = (
+      FB._domain[domain] + path +
+      (path.indexOf('?') > -1 ? '&' : '?') +
+      FB.QS.encode(params)
+    );
     if (url.length > 2000) {
       throw new Error('JSONP only support a maximum of 2000 bytes of input.');
     }
@@ -361,7 +361,7 @@ FB.provide('ApiServer', {
           method = 'post';
           body = FB.QS.encode(params);
         } else {
-          url += '?' + body;
+          url += (url.indexOf('?') > -1 ? '&' : '?') + body;
           body = '';
         }
       } else if (method !== 'post') {
