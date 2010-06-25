@@ -275,15 +275,52 @@ FB.provide('ApiServer', {
     }
     params.sdk = 'joey';
 
-    try {
-      FB.ApiServer.jsonp(domain, path, method, FB.JSON.flatten(params), cb);
-    } catch (x) {
-      if (FB.Flash.hasMinVersion()) {
-        FB.ApiServer.flash(domain, path, method, FB.JSON.flatten(params), cb);
-      } else {
-        throw new Error('Flash is required for this API call.');
-      }
-    }
+    FB.ApiServer.yui_io_xdr(domain,path,method, FB.JSON.flatten(params), cb);
+  },
+  
+  yui_io_xdr: function (domain, path, method, params, cb) {
+	  // required: http://yui.yahooapis.com/3.1.1/build/yui/yui-min.js
+	  YUI().use('io-xdr', function(Y) {
+		  var
+	        url  = FB._domain[domain] + path,
+	        body = "";
+
+	      if (method === 'get') {
+	        // convert GET to POST if needed based on URL length
+	        if (url.length + body.length > 2000) {
+	          if (domain === 'graph') {
+	            params.method = 'get';
+	          }
+	          method = 'post';
+	          body = FB.QS.encode(params);
+	        } else {
+	          url += (url.indexOf('?') > -1 ? '&' : '?') + body;
+	          body = '';
+	        }
+	      } else if (method !== 'post') {
+	        // we use method override and do a POST for PUT/DELETE as flash has
+	        // trouble otherwise
+	        if (domain === 'graph') {
+	          params.method = method;
+	        }
+	        method = 'post';
+	        body = FB.QS.encode(params);
+	      }
+	      var complete = function(response){
+	        cb && cb(FB.JSON.parse(response.repsonseText));
+	      };
+	      var cfg = {
+	    		  method: method,
+	    		  data: params,
+	    		  on: {
+	    	  		complete: complete
+	      		  },
+	      		  xdr: {
+	      			  	use: "native"
+	      		  }
+	      };
+	      var request = Y.io(url,cfg);
+		});
   },
 
   /**
