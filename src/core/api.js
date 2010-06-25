@@ -316,7 +316,7 @@ FB.provide('ApiServer', {
 	    	  		complete: complete
 	      		  },
 	      		  xdr: {
-	      			  	use: "native"
+	      			  	use: "flash"
 	      		  }
 	      };
 	      var request = Y.io(url,cfg);
