@@ -1,0 +1,207 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.yahoo</groupId>
+	<artifactId>facebook-connect-js</artifactId>
+	<version>1.0-SNAPSHOT</version>
+	<packaging>jar</packaging>
+
+	<pluginRepositories>
+		<pluginRepository>
+			<name>oss.sonatype.org - github-releases</name>
+			<id>oss.sonatype.org-github-releases</id>
+			<url>http://oss.sonatype.org/content/repositories/github-releases</url>
+		</pluginRepository>
+	</pluginRepositories>
+
+	<build>
+		<sourceDirectory>src</sourceDirectory>
+		<resources>
+			<resource>
+				<directory>src/</directory>
+				<includes>
+					<include>**/*.js</include>
+					<include>**/*.css</include>
+				</includes>
+			</resource>
+		</resources>
+
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<version>1.4</version>
+				<executions>
+					<execution>
+						<id>combine-files</id>
+						<phase>generate-sources</phase>
+						<configuration>
+							<tasks>
+								<!-- TODO: order files properly -->
+
+								<filelist id="jsfiles" dir="${project.build.sourceDirectory}">
+									<file name="third-party/json2.js" />
+
+									<file name="core/prelude.js" />
+									<file name="common/type.js" />
+
+									<file name="core/api.js" />
+									<file name="core/auth.js" />
+
+									<file name="core/canvas.js" />
+									<file name="core/content.js" />
+									<file name="core/cookie.js" />
+									<file name="core/dialog.js" />
+									<file name="core/event.js" />
+									<file name="core/flash.js" />
+									<file name="core/init.js" />
+									<file name="core/insights.js" />
+									<file name="core/intl.js" />
+									<file name="core/json.js" />
+									<file name="core/qs.js" />
+									<file name="core/ui.js" />
+									<file name="core/ui_methods.js" />
+									<file name="core/xd.js" />
+
+									<file name="compat/ui.js" />
+
+									<file name="common/array.js" />
+									<file name="common/dom.js" />
+									<file name="common/obj.js" />
+									<file name="common/string.js" />
+
+									<file name="data/waitable.js" />
+									<file name="data/query.js" />
+									<file name="data/data.js" />
+
+									<file name="xfbml/element.js" />
+									<file name="xfbml/xfbml.js" />
+									<file name="xfbml/helper.js" />
+									<file name="xfbml/iframe_widget.js" />
+									<file name="xfbml/button_element.js" />
+									<file name="xfbml/edge_widget.js" />
+
+									<file name="xfbml/tags/activity.js" />
+									<file name="xfbml/tags/comments.js" />
+									<file name="xfbml/tags/fan.js" />
+									<file name="xfbml/tags/like.js" />
+									<file name="xfbml/tags/live_stream.js" />
+									<file name="xfbml/tags/loginbutton.js" />
+									<file name="xfbml/tags/name.js" />
+									<file name="xfbml/tags/profilepic.js" />
+									<file name="xfbml/tags/recommendations.js" />
+									<file name="xfbml/tags/serverfbml.js" />
+									<file name="xfbml/tags/sharebutton.js" />
+
+									<file name="strings/en_US.js" />
+								</filelist>
+
+								<filelist id="cssfiles" dir="${project.build.sourceDirectory}">
+									<file name="css/base.css" />
+									<file name="css/dialog.css" />
+									<file name="css/iframe_widget.css" />
+									<file name="css/button.css" />
+									<file name="css/share_button.css" />
+								</filelist>
+
+								<concat destfile="${project.build.directory}/generated-sources/all.js">
+									<filelist refid="jsfiles" />
+								</concat>
+
+								<concat destfile="${project.build.directory}/generated-sources/all.css">
+									<filelist refid="cssfiles" />
+								</concat>
+
+							</tasks>
+						</configuration>
+						<goals>
+							<goal>run</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>munge-urls</id>
+						<phase>process-resources</phase>
+						<configuration>
+							<tasks>
+
+								<replaceregexp flags="g">
+									<regexp pattern="url\(/" />
+									<substitution expression="url(http://static.ak.fbcdn.net/" />
+									<fileset dir="${project.build.outputDirectory}">
+										<include name="*.css" />
+										<include name="**/*.css" />
+									</fileset>
+								</replaceregexp>
+							</tasks>
+						</configuration>
+						<goals>
+							<goal>run</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<version>1.5</version>
+				<executions>
+					<execution>
+						<id>add-sources</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>add-source</goal>
+						</goals>
+						<configuration>
+							<sources>
+								<source>${project.build.directory}/generated-sources</source>
+							</sources>
+						</configuration>
+					</execution>
+					<execution>
+						<id>add-resources</id>
+						<phase>generate-resources</phase>
+						<goals>
+							<goal>add-resource</goal>
+						</goals>
+						<configuration>
+							<resources>
+								<resource>
+									<directory>${project.build.directory}/generated-sources</directory>
+									<includes>
+										<include>**/*.js</include>
+										<include>**/*.css</include>
+									</includes>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>net.alchim31.maven</groupId>
+				<artifactId>yuicompressor-maven-plugin</artifactId>
+				<version>0.9</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>compress</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<!--
+						<aggregations> <aggregation> <removeIncluded>true</removeIncluded> <insertNewLine>false</insertNewLine>
+						<output>${project.build.directory}/${project.build.finalName}-min.js</output> <includes> <include>classes/**/*-min.js</include> </includes> </aggregation>
+						<aggregation> <removeIncluded>true</removeIncluded> <insertNewLine>false</insertNewLine>
+						<output>${project.build.directory}/${project.build.finalName}.js</output> <includes> <include>classes/**/*.js</include> </includes> </aggregation>
+						<aggregation> <removeIncluded>true</removeIncluded> <insertNewLine>false</insertNewLine>
+						<output>${project.build.directory}/${project.build.finalName}-min.css</output> <includes> <include>classes/**/*-min.css</include> </includes>
+						</aggregation> <aggregation> <removeIncluded>true</removeIncluded> <insertNewLine>false</insertNewLine>
+						<output>${project.build.directory}/${project.build.finalName}.css</output> <includes> <include>classes/**/*.css</include> </includes> </aggregation>
+						</aggregations>
+					-->
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
