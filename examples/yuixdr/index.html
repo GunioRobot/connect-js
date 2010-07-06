@@ -1,0 +1,67 @@
+<html>
+
+<head>
+<link rel="stylesheet" href="../../target/classes/all.css" />
+<script type="text/javascript"
+	src="http://yui.yahooapis.com/combo?3.1.1/build/yui/yui-debug.js&3.1.1/build/dump/dump-debug.js"></script>
+<script type="text/javascript" src="../../target/classes/all.js"></script>
+</head>
+
+<body>
+<div id="fb-root"></div>
+
+<div><fb:login-button autologoutlink="true" v="2"
+	xmlns:fb="http://www.facebook.com/2008/fbml"></fb:login-button></div>
+
+<script type="text/javascript">
+	FB.YuiIo.transportCfg = {
+		src : "../../target/classes/io.swf"
+	};
+
+	var cu = (window.location.protocol + "//localhost:8888/examples/yuixdr/channelUrl.html");
+
+	FB.init( {
+		appId : 130375173667364,
+		logging : true,
+		status : true,
+		cookie : true,
+		xfbml : true,
+		channelUrl : cu
+	});
+
+	FB.Event.subscribe("auth.login", function(response) {
+		console.log("auth.login");
+		console.log(response);
+	});
+
+	FB.Event.subscribe("auth.logout", function(response) {
+		console.log("auth.logout");
+		console.log(response);
+	});
+
+	FB.Event.subscribe("auth.sessionChange", function(response) {
+		console.log("auth.sessionChange");
+		console.log(response);
+	});
+
+	FB.Event.subscribe("auth.statusChange", function(response) {
+		console.log("auth.statusChange");
+		console.log(response);
+	});
+
+	FB.Event.subscribe("FB.loginStatus", function(response) {
+		console.log("FB.loginStatus");
+		console.log(response);
+	});
+
+	FB.getLoginStatus(function(response) {
+		console.log("getLoginStatus");
+		console.log(response);
+	});
+
+	FB.api('/me', function(ru) {
+		console.log(ru.name);
+	});
+</script>
+</body>
+</html>
