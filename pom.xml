@@ -81,6 +81,7 @@
 									<file name="xfbml/iframe_widget.js" />
 									<file name="xfbml/button_element.js" />
 									<file name="xfbml/edge_widget.js" />
+									<file name="xfbml/edge_comment_widget.js" />
 
 									<file name="xfbml/tags/activity.js" />
 									<file name="xfbml/tags/comments.js" />
