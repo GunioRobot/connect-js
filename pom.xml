@@ -101,10 +101,14 @@
 
 								<filelist id="cssfiles" dir="${project.build.sourceDirectory}">
 									<file name="css/base.css" />
+									<file name="css/button.css" />
 									<file name="css/dialog.css" />
 									<file name="css/iframe_widget.css" />
-									<file name="css/button.css" />
+									<file name="css/edge_comment_widget.css" />
+
 									<file name="css/share_button.css" />
+									<file name="css/connect_bar_widget.css" />
+									<file name="css/social_bar_widget.css" />
 								</filelist>
 
 								<concat destfile="${project.build.directory}/generated-sources/all.js">
