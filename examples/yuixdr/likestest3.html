@@ -1,0 +1,52 @@
+<html>
+
+<head>
+<link rel="stylesheet" href="../../target/classes/all.css" />
+<script type="text/javascript"
+	src="http://yui.yahooapis.com/combo?3.1.1/build/yui/yui-debug.js&3.1.1/build/dump/dump-debug.js"></script>
+<script type="text/javascript" src="../../target/classes/all.js"></script>
+</head>
+
+<body margin="0" style="margin: 0px">
+
+<script>
+	function gup(name) {
+		name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
+		var regexS = "[\\?&]" + name + "=([^&#]*)";
+		var regex = new RegExp(regexS);
+		var results = regex.exec(window.location.href);
+		if (results == null)
+			return "";
+		else
+			return results[1];
+	}
+</script>
+
+<script type="text/javascript">
+	document.write("<fb:share-button class='url' type='" + gup('type')
+			+ "' href='" + gup('url') + "'>");
+	document.write("</fb:");
+	document.write("share-button>");
+</script>
+
+
+
+
+<script type="text/javascript">
+	FB.YuiIo.transportCfg = {
+		src : "../../target/classes/io.swf"
+	};
+
+	var cu = (window.location.protocol + "//localhost:8888/examples/yuixdr/channelUrl.html");
+
+	FB.init( {
+		//appId : 130375173667364,
+		logging : true,
+		status : true,
+		cookie : true,
+		xfbml : true,
+		channelUrl : cu
+	});
+</script>
+</body>
+</html>

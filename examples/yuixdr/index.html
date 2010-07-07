@@ -12,6 +12,342 @@
 
 <div><fb:login-button autologoutlink="true" v="2"
 	xmlns:fb="http://www.facebook.com/2008/fbml"></fb:login-button></div>
+<hr />
+
+
+
+
+
+
+
+<!--  this used to be in standalone test: http://test.happyfern.com/likes/likestest.html -->
+<div><!-- RED SOX -->
+
+<h2>Like: <a href="http://sports.yahoo.com/mlb/teams/bos">Red
+Sox</a></h2>
+<table border="1">
+	<tr>
+		<th>Js</th>
+		<th>Iframe</th>
+	</tr>
+	<tr>
+		<td><fb:like href="http://sports.yahoo.com/mlb/teams/bos"></fb:like></td>
+		<td><iframe
+			src="http://www.facebook.com/plugins/like.php?href=http%253A%252F%252Fsports.yahoo.com%252Fmlb%252Fteams%252Fbos&amp;layout=standard&amp;show_faces=true&amp;width=450&amp;action=like&amp;font&amp;colorscheme=light&amp;height=80"
+			scrolling="no" frameborder="0"
+			style="border: none; overflow: hidden; width: 450px; height: 80px;"
+			allowTransparency="true"></iframe></td>
+	</tr>
+	<tr>
+		<td><fb:like href="http://sports.yahoo.com/mlb/teams/bos"
+			show_faces="false"></fb:like></td>
+		<td><iframe
+			src="http://www.facebook.com/plugins/like.php?href=http%253A%252F%252Fsports.yahoo.com%252Fmlb%252Fteams%252Fbos&amp;layout=standard&amp;show_faces=false&amp;width=450&amp;action=like&amp;font&amp;colorscheme=light&amp;height=28"
+			scrolling="no" frameborder="0"
+			style="border: none; overflow: hidden; width: 450px; height: 28px;"
+			allowTransparency="true"></iframe></td>
+	</tr>
+	<tr>
+		<td><fb:like href="http://sports.yahoo.com/mlb/teams/bos"
+			layout="button_count"></fb:like></td>
+		<td><iframe
+			src="http://www.facebook.com/plugins/like.php?href=http%253A%252F%252Fsports.yahoo.com%252Fmlb%252Fteams%252Fbos&amp;layout=button_count&amp;show_faces=false&amp;width=90&amp;action=like&amp;font&amp;colorscheme=light&amp;height=21"
+			scrolling="no" frameborder="0"
+			style="border: none; overflow: hidden; width: 90px; height: 21px;"
+			allowTransparency="true"></iframe></td>
+	</tr>
+</table>
+
+<h2>Recommend: <a href="http://sports.yahoo.com/mlb/teams/bos">Red
+Sox</a></h2>
+<table border="1">
+	<tr>
+		<th>Js</th>
+		<th>Iframe</th>
+	</tr>
+	<tr>
+		<td><fb:like href="http://sports.yahoo.com/mlb/teams/bos"
+			action="recommend"></fb:like></td>
+		<td><iframe
+			src="http://www.facebook.com/plugins/like.php?href=http%253A%252F%252Fsports.yahoo.com%252Fmlb%252Fteams%252Fbos&amp;layout=standard&amp;show_faces=true&amp;width=450&amp;action=recommend&amp;font&amp;colorscheme=light&amp;height=80"
+			scrolling="no" frameborder="0"
+			style="border: none; overflow: hidden; width: 450px; height: 80px;"
+			allowTransparency="true"></iframe></td>
+	</tr>
+	<tr>
+		<td><fb:like href="http://sports.yahoo.com/mlb/teams/bos"
+			show_faces="false" action="recommend"></fb:like></td>
+		<td><iframe
+			src="http://www.facebook.com/plugins/like.php?href=http%253A%252F%252Fsports.yahoo.com%252Fmlb%252Fteams%252Fbos&amp;layout=standard&amp;show_faces=false&amp;width=450&amp;action=recommend&amp;font&amp;colorscheme=light&amp;height=28"
+			scrolling="no" frameborder="0"
+			style="border: none; overflow: hidden; width: 450px; height: 28px;"
+			allowTransparency="true"></iframe></td>
+	</tr>
+	<tr>
+		<td><fb:like href="http://sports.yahoo.com/mlb/teams/bos"
+			layout="button_count" action="recommend"></td>
+		<td><iframe
+			src="http://www.facebook.com/plugins/like.php?href=http%253A%252F%252Fsports.yahoo.com%252Fmlb%252Fteams%252Fbos&amp;layout=button_count&amp;show_faces=false&amp;width=135&amp;action=recommend&amp;font&amp;colorscheme=light&amp;height=21"
+			scrolling="no" frameborder="0"
+			style="border: none; overflow: hidden; width: 135px; height: 21px;"
+			allowTransparency="true"></iframe></td>
+	</tr>
+</table>
+
+<h2>Share: <a href="http://sports.yahoo.com/mlb/teams/bos">Red
+Sox</a></h2>
+<table border="1">
+	<tr>
+		<th>Js</th>
+		<th>Iframe (old)</th>
+		<th>Iframe (new)</th>
+	</tr>
+	<tr>
+		<td><fb:share-button class="url"
+			href="http://sports.yahoo.com/mlb/teams/bos" type="box_count"></fb:share-button></td>
+		<td><iframe
+			src="likestest2.html?type=box_count&url=http://sports.yahoo.com/mlb/teams/bos"
+			scrolling="no" frameborder="0"
+			style="border: none; overflow: hidden; width: 60px; height: 60px;"
+			allowTransparency="true"></iframe></td>
+		<td><iframe
+			src="likestest3.html?type=box_count&url=http://sports.yahoo.com/mlb/teams/bos"
+			scrolling="no" frameborder="0"
+			style="border: none; overflow: hidden; width: 60px; height: 60px;"
+			allowTransparency="true"></iframe></td>
+	</tr>
+	<tr>
+		<td><fb:share-button class="url"
+			href="http://sports.yahoo.com/mlb/teams/bos" type="button_count"></fb:share-button></td>
+		<td><iframe
+			src="likestest2.html?type=button_count&url=http://sports.yahoo.com/mlb/teams/bos"
+			scrolling="no" frameborder="0"
+			style="border: none; overflow: hidden; width: 100px; height: 18px;"
+			allowTransparency="true"></iframe></td>
+		<td><iframe
+			src="likestest3.html?type=button_count&url=http://sports.yahoo.com/mlb/teams/bos"
+			scrolling="no" frameborder="0"
+			style="border: none; overflow: hidden; width: 100px; height: 18px;"
+			allowTransparency="true"></iframe></td>
+	</tr>
+	<tr>
+		<td><fb:share-button class="url"
+			href="http://sports.yahoo.com/mlb/teams/bos" type="button"></fb:share-button></td>
+		<td><iframe
+			src="likestest2.html?type=button&url=http://sports.yahoo.com/mlb/teams/bos"
+			scrolling="no" frameborder="0"
+			style="border: none; overflow: hidden; width: 60px; height: 18px;"
+			allowTransparency="true"></iframe></td>
+		<td><iframe
+			src="likestest3.html?type=button&url=http://sports.yahoo.com/mlb/teams/bos"
+			scrolling="no" frameborder="0"
+			style="border: none; overflow: hidden; width: 60px; height: 18px;"
+			allowTransparency="true"></iframe></td>
+	</tr>
+	<tr>
+		<td><fb:share-button class="url"
+			href="http://sports.yahoo.com/mlb/teams/bos" type="icon"></fb:share-button></td>
+		<td><iframe
+			src="likestest2.html?type=icon&url=http://sports.yahoo.com/mlb/teams/bos"
+			scrolling="no" frameborder="0"
+			style="border: none; overflow: hidden; width: 24px; height: 16px;"
+			allowTransparency="true"></iframe></td>
+		<td><iframe
+			src="likestest3.html?type=icon&url=http://sports.yahoo.com/mlb/teams/bos"
+			scrolling="no" frameborder="0"
+			style="border: none; overflow: hidden; width: 24px; height: 16px;"
+			allowTransparency="true"></iframe></td>
+	</tr>
+	<tr>
+		<td><fb:share-button class="url"
+			href="http://sports.yahoo.com/mlb/teams/bos" type="icon_link"></fb:share-button></td>
+		<td><iframe
+			src="likestest2.html?type=icon_link&url=http://sports.yahoo.com/mlb/teams/bos"
+			scrolling="no" frameborder="0"
+			style="border: none; overflow: hidden; width: 100px; height: 15px;"
+			allowTransparency="true"></iframe></td>
+		<td><iframe
+			src="likestest3.html?type=icon_link&url=http://sports.yahoo.com/mlb/teams/bos"
+			scrolling="no" frameborder="0"
+			style="border: none; overflow: hidden; width: 100px; height: 15px;"
+			allowTransparency="true"></iframe></td>
+	</tr>
+</table>
+
+
+
+
+
+
+<br />
+<br />
+<br />
+
+<!-- YANKEES -->
+
+<h2>Like: <a href="http://sports.yahoo.com/mlb/teams/nyy">Yankees</a></h2>
+<table border="1">
+	<tr>
+		<th>Js</th>
+		<th>Iframe</th>
+	</tr>
+	<tr>
+		<td><fb:like href="http://sports.yahoo.com/mlb/teams/nyy"></fb:like></td>
+		<td><iframe
+			src="http://www.facebook.com/plugins/like.php?href=http%253A%252F%252Fsports.yahoo.com%252Fmlb%252Fteams%252Fnyy&amp;layout=standard&amp;show_faces=true&amp;width=450&amp;action=like&amp;font&amp;colorscheme=light&amp;height=80"
+			scrolling="no" frameborder="0"
+			style="border: none; overflow: hidden; width: 450px; height: 80px;"
+			allowTransparency="true"></iframe></td>
+	</tr>
+	<tr>
+		<td><fb:like href="http://sports.yahoo.com/mlb/teams/nyy"
+			show_faces="false"></fb:like></td>
+		<td><iframe
+			src="http://www.facebook.com/plugins/like.php?href=http%253A%252F%252Fsports.yahoo.com%252Fmlb%252Fteams%252Fnyy&amp;layout=standard&amp;show_faces=false&amp;width=450&amp;action=like&amp;font&amp;colorscheme=light&amp;height=28"
+			scrolling="no" frameborder="0"
+			style="border: none; overflow: hidden; width: 450px; height: 28px;"
+			allowTransparency="true"></iframe></td>
+	</tr>
+	<tr>
+		<td><fb:like href="http://sports.yahoo.com/mlb/teams/nyy"
+			layout="button_count"></fb:like></td>
+		<td><iframe
+			src="http://www.facebook.com/plugins/like.php?href=http%253A%252F%252Fsports.yahoo.com%252Fmlb%252Fteams%252Fnyy&amp;layout=button_count&amp;show_faces=false&amp;width=90&amp;action=like&amp;font&amp;colorscheme=light&amp;height=21"
+			scrolling="no" frameborder="0"
+			style="border: none; overflow: hidden; width: 90px; height: 21px;"
+			allowTransparency="true"></iframe></td>
+	</tr>
+</table>
+
+<h2>Recommend: <a href="http://sports.yahoo.com/mlb/teams/nyy">Yankees</a></h2>
+<table border="1">
+	<tr>
+		<th>Js</th>
+		<th>Iframe</th>
+	</tr>
+	<tr>
+		<td><fb:like href="http://sports.yahoo.com/mlb/teams/nyy"
+			action="recommend"></fb:like></td>
+		<td><iframe
+			src="http://www.facebook.com/plugins/like.php?href=http%253A%252F%252Fsports.yahoo.com%252Fmlb%252Fteams%252Fnyy&amp;layout=standard&amp;show_faces=true&amp;width=450&amp;action=recommend&amp;font&amp;colorscheme=light&amp;height=80"
+			scrolling="no" frameborder="0"
+			style="border: none; overflow: hidden; width: 450px; height: 80px;"
+			allowTransparency="true"></iframe></td>
+	</tr>
+	<tr>
+		<td><fb:like href="http://sports.yahoo.com/mlb/teams/nyy"
+			show_faces="false" action="recommend"></fb:like></td>
+		<td><iframe
+			src="http://www.facebook.com/plugins/like.php?href=http%253A%252F%252Fsports.yahoo.com%252Fmlb%252Fteams%252Fnyy&amp;layout=standard&amp;show_faces=false&amp;width=450&amp;action=recommend&amp;font&amp;colorscheme=light&amp;height=28"
+			scrolling="no" frameborder="0"
+			style="border: none; overflow: hidden; width: 450px; height: 28px;"
+			allowTransparency="true"></iframe></td>
+	</tr>
+	<tr>
+		<td><fb:like href="http://sports.yahoo.com/mlb/teams/nyy"
+			layout="button_count" action="recommend"></td>
+		<td><iframe
+			src="http://www.facebook.com/plugins/like.php?href=http%253A%252F%252Fsports.yahoo.com%252Fmlb%252Fteams%252Fnyy&amp;layout=button_count&amp;show_faces=false&amp;width=135&amp;action=recommend&amp;font&amp;colorscheme=light&amp;height=21"
+			scrolling="no" frameborder="0"
+			style="border: none; overflow: hidden; width: 135px; height: 21px;"
+			allowTransparency="true"></iframe></td>
+	</tr>
+</table>
+
+<h2>Share: <a href="http://sports.yahoo.com/mlb/teams/nyy">Yankees</a></h2>
+<table border="1">
+	<tr>
+		<th>Js</th>
+		<th>Iframe (old)</th>
+		<th>Iframe (new)</th>
+	</tr>
+	<tr>
+		<td><fb:share-button class="url"
+			href="http://sports.yahoo.com/mlb/teams/nyy" type="box_count"></fb:share-button></td>
+		<td><iframe
+			src="likestest2.html?type=box_count&url=http://sports.yahoo.com/mlb/teams/nyy"
+			scrolling="no" frameborder="0"
+			style="border: none; overflow: hidden; width: 60px; height: 60px;"
+			allowTransparency="true"></iframe></td>
+		<td><iframe
+			src="likestest3.html?type=box_count&url=http://sports.yahoo.com/mlb/teams/nyy"
+			scrolling="no" frameborder="0"
+			style="border: none; overflow: hidden; width: 60px; height: 60px;"
+			allowTransparency="true"></iframe></td>
+	</tr>
+	<tr>
+		<td><fb:share-button class="url"
+			href="http://sports.yahoo.com/mlb/teams/nyy" type="button_count"></fb:share-button></td>
+		<td><iframe
+			src="likestest2.html?type=button_count&url=http://sports.yahoo.com/mlb/teams/nyy"
+			scrolling="no" frameborder="0"
+			style="border: none; overflow: hidden; width: 100px; height: 18px;"
+			allowTransparency="true"></iframe></td>
+		<td><iframe
+			src="likestest3.html?type=button_count&url=http://sports.yahoo.com/mlb/teams/nyy"
+			scrolling="no" frameborder="0"
+			style="border: none; overflow: hidden; width: 100px; height: 18px;"
+			allowTransparency="true"></iframe></td>
+	</tr>
+	<tr>
+		<td><fb:share-button class="url"
+			href="http://sports.yahoo.com/mlb/teams/nyy" type="button"></fb:share-button></td>
+		<td><iframe
+			src="likestest2.html?type=button&url=http://sports.yahoo.com/mlb/teams/nyy"
+			scrolling="no" frameborder="0"
+			style="border: none; overflow: hidden; width: 60px; height: 18px;"
+			allowTransparency="true"></iframe></td>
+		<td><iframe
+			src="likestest3.html?type=button&url=http://sports.yahoo.com/mlb/teams/nyy"
+			scrolling="no" frameborder="0"
+			style="border: none; overflow: hidden; width: 60px; height: 18px;"
+			allowTransparency="true"></iframe></td>
+	</tr>
+	<tr>
+		<td><fb:share-button class="url"
+			href="http://sports.yahoo.com/mlb/teams/nyy" type="icon"></fb:share-button></td>
+		<td><iframe
+			src="likestest2.html?type=icon&url=http://sports.yahoo.com/mlb/teams/nyy"
+			scrolling="no" frameborder="0"
+			style="border: none; overflow: hidden; width: 24px; height: 16px;"
+			allowTransparency="true"></iframe></td>
+		<td><iframe
+			src="likestest3.html?type=icon&url=http://sports.yahoo.com/mlb/teams/nyy"
+			scrolling="no" frameborder="0"
+			style="border: none; overflow: hidden; width: 24px; height: 16px;"
+			allowTransparency="true"></iframe></td>
+	</tr>
+	<tr>
+		<td><fb:share-button class="url"
+			href="http://sports.yahoo.com/mlb/teams/nyy" type="icon_link"></fb:share-button></td>
+		<td><iframe
+			src="likestest2.html?type=icon_link&url=http://sports.yahoo.com/mlb/teams/nyy"
+			scrolling="no" frameborder="0"
+			style="border: none; overflow: hidden; width: 100px; height: 15px;"
+			allowTransparency="true"></iframe></td>
+		<td><iframe
+			src="likestest3.html?type=icon_link&url=http://sports.yahoo.com/mlb/teams/nyy"
+			scrolling="no" frameborder="0"
+			style="border: none; overflow: hidden; width: 100px; height: 15px;"
+			allowTransparency="true"></iframe></td>
+	</tr>
+</table>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <script type="text/javascript">
 	FB.YuiIo.transportCfg = {
