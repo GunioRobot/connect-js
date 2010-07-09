@@ -3,16 +3,13 @@ var FB_MODULES = {
 	groups : {
 		"gallery-fb" : {
 			combine : false,
-			// base : "http://l.yimg.com/a/lib/sp/fn/",
 			base : "http://localhost:8888/target/classes/",
 			modules : {
 				"gallery-fb-connect" : {
-					// path : "js/gallery_fb_connect.js",
 					path : "gallery-fb-connect.js?",
 					requires : [ "gallery-fb-connect-css" ]
 				},
 				"gallery-fb-connect-css" : {
-					// path : "css/gallery_fb_connect.css",
 					path : "gallery-fb-connect.css?",
 					type : "css"
 				}
@@ -29,11 +26,11 @@ var FB_MODULES_CDN = {
 			base : "http://l.yimg.com/a/lib/sp/fn/",
 			modules : {
 				"gallery-fb-connect" : {
-					path : "js/gallery_fb_connect.js?",
+					path : "gallery-fb-connect.js?",
 					requires : [ "gallery-fb-connect-css" ]
 				},
 				"gallery-fb-connect-css" : {
-					path : "css/gallery_fb_connect.css?",
+					path : "gallery-fb-connect.css?",
 					type : "css"
 				}
 			}
