@@ -41,6 +41,9 @@
 								<get src="http://developer.yahoo.com/yui/3/build/io/io.swf" dest="${project.build.directory}/generated-sources/" skipexisting="true" />
 
 								<filelist id="jsfiles" dir="${project.build.sourceDirectory}">
+								
+									<file name="yui/add_open.js" />
+									
 									<file name="third-party/json2.js" />
 
 									<file name="core/prelude.js" />
@@ -98,6 +101,8 @@
 									<file name="strings/en_US.js" />
 
 									<file name="yui/yui.js" />
+									
+									<file name="yui/add_close.js" />
 								</filelist>
 
 								<filelist id="cssfiles" dir="${project.build.sourceDirectory}">

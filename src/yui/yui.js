@@ -134,3 +134,7 @@ FB.provide("YuiIo", {
 		}
 	}
 }, true);
+
+if (typeof Y.config.FB !== 'undefined' && typeof Y.config.FB.cfg === 'object') {
+    FB.init(Y.config.FB.cfg);
+}

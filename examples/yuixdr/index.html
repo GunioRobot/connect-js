@@ -1,10 +1,8 @@
 <html>
 
 <head>
-<link rel="stylesheet" href="../../target/classes/all.css" />
 <script type="text/javascript"
 	src="http://yui.yahooapis.com/combo?3.1.1/build/yui/yui-debug.js&3.1.1/build/dump/dump-debug.js"></script>
-<script type="text/javascript" src="../../target/classes/all.js"></script>
 </head>
 
 <body>
@@ -350,20 +348,34 @@ Sox</a></h2>
 
 
 <script type="text/javascript">
+
+YUI({
+    'modules' : {
+        'gallery-fb-connect' : {
+            'fullpath' : 'http://l.yimg.com/a/lib/sp/fn/js/gallery_fb_connect.js',
+            'requires' : ['gallery-fb-connect-css']
+        },
+        'gallery-fb-connect-css' : {
+            'fullpath' : 'http://l.yimg.com/a/lib/sp/fn/css/gallery_fb_connect.css',
+            'type' : 'css'
+        }
+    }
+}, {
+    FB: {
+        cfg : {
+            appId : 130375173667364,
+            logging : true,
+            status : true,
+            cookie : true,
+            xfbml : true,
+            channelUrl : window.location.protocol + "//localhost:8888/examples/yuixdr/channelUrl.html"
+        }
+    }
+}).use('gallery-fb-connect', function(Y) {
+	
 	FB.YuiIo.transportCfg = {
 		src : "../../target/classes/io.swf"
 	};
-
-	var cu = (window.location.protocol + "//localhost:8888/examples/yuixdr/channelUrl.html");
-
-	FB.init( {
-		appId : 130375173667364,
-		logging : true,
-		status : true,
-		cookie : true,
-		xfbml : true,
-		channelUrl : cu
-	});
 
 	FB.Event.subscribe("auth.login", function(response) {
 		console.log("auth.login");
@@ -398,6 +410,8 @@ Sox</a></h2>
 	FB.api('/me', function(ru) {
 		console.log(ru.name);
 	});
+	
+});
 </script>
 </body>
 </html>
