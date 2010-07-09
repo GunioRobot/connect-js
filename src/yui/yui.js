@@ -30,9 +30,7 @@
  * @static
  * @access public
  */
-FB.YUI = YUI( {
-	loadOptional : true
-});
+FB.YUI = Y;
 
 FB.provide("Flash", {
 	hasMinVersion : function() {
@@ -49,47 +47,35 @@ FB.provide("ApiServer", {
 		}
 	},
 	yui_io_xdr : function(domain, path, method, params, cb) {
-		FB.YUI.use("io-xdr", function(Y) {
-			var url = FB._domain[domain] + path;
+		var url = FB._domain[domain] + path;
 
-			if (method !== 'get' && method !== 'post') {
-				method = 'post';
-				params.method = method;
+		if (method !== 'get' && method !== 'post') {
+			method = 'post';
+			params.method = method;
+		}
+
+		var onSuccess = function(transactionid, response, arguments) {
+			try {
+				var json = FB.JSON.parse(response.responseText);
+				cb && cb(json);
+			} catch (ex) {
+				FB.log(ex);
 			}
+		};
 
-			var onSuccess = function(transactionid, response, arguments) {
-				try {
-					var json = FB.JSON.parse(response.responseText);
-					cb && cb(json);
-				} catch (ex) {
-					FB.log(ex);
-				}
-			};
+		var cfg = {
+			method : method,
+			data : params,
+			on : {
+				success : onSuccess
+			}
+		};
 
-			var cfg = {
-				method : method,
-				data : params,
-				on : {
-					success : onSuccess
-				},
-				xdr : {
-					use : "flash",
-					dataType : "json",
-					credentials : false
-				},
-				sync : false
-			};
-			FB.YuiIo.onReady(function() {
-				var request = Y.io(url, cfg);
-			});
-		});
+		FB.YuiIo.io(url, cfg);
 	}
 }, true);
 
 FB.provide("YuiIo", {
-	transportCfg : {
-		src : "/io.swf"
-	},
 	/**
 	 * The onReady callbacks.
 	 * 
@@ -111,7 +97,12 @@ FB.provide("YuiIo", {
 				FB.YuiIo._callbacks = [];
 			};
 			Y.on("io:xdrReady", rc);
-			Y.io.transport(FB.YuiIo.transportCfg);
+
+			if (typeof Y.config.FB !== 'undefined'
+					&& typeof Y.config.FB.YuiIo !== 'undefined'
+					&& typeof Y.config.FB.YuiIo.transportCfg === 'object') {
+				Y.io.transport(Y.config.FB.YuiIo.transportCfg);
+			}
 		});
 	},
 	/**
@@ -132,9 +123,25 @@ FB.provide("YuiIo", {
 			FB.YuiIo.init();
 			FB.YuiIo._callbacks.push(cb);
 		}
+	},
+
+	io : function(url, cfg) {
+		FB.copy(cfg, {
+			xdr : {
+				use : "flash",
+				dataType : "json",
+				credentials : false
+			},
+			sync : false
+		}, true);
+		FB.YuiIo.onReady(function() {
+			var request = FB.YUI.io(url, cfg);
+		});
 	}
 }, true);
 
-if (typeof Y.config.FB !== 'undefined' && typeof Y.config.FB.cfg === 'object') {
-    FB.init(Y.config.FB.cfg);
+if (typeof Y.config.FB !== 'undefined') {
+	if (typeof Y.config.FB.init === 'object') {
+		FB.init(Y.config.FB.init);
+	}
 }

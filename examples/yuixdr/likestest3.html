@@ -3,9 +3,11 @@
 <head>
 <script type="text/javascript"
 	src="http://yui.yahooapis.com/combo?3.1.1/build/yui/yui-debug.js&3.1.1/build/dump/dump-debug.js"></script>
+<script type="text/javascript" src="module_conf.js"></script>
 </head>
 
 <body margin="0" style="margin: 0px">
+<div id="fb-root"></div>
 
 <script>
 	function gup(name) {
@@ -27,42 +29,9 @@
 	document.write("share-button>");
 </script>
 
-
-
-
 <script type="text/javascript">
-
-
-YUI({
-    'modules' : {
-        'gallery-fb-connect' : {
-            'fullpath' : 'http://l.yimg.com/a/lib/sp/fn/js/gallery_fb_connect.js',
-            'requires' : ['gallery-fb-connect-css']
-        },
-        'gallery-fb-connect-css' : {
-            'fullpath' : 'http://l.yimg.com/a/lib/sp/fn/css/gallery_fb_connect.css',
-            'type' : 'css'
-        }
-    }
-}).use('gallery-fb-connect', function(Y) {
-
-	FB.YuiIo.transportCfg = {
-		src : "../../target/classes/io.swf"
-	};
-
-	var cu = (window.location.protocol + "//localhost:8888/examples/yuixdr/channelUrl.html");
-
-	FB.init( {
-		//appId : 130375173667364,
-		logging : true,
-		status : true,
-		cookie : true,
-		xfbml : true,
-		channelUrl : cu
-	});
-	
-	
-});
+	YUI(FB_MODULES, FB_INIT).use("gallery-fb-connect");
 </script>
+
 </body>
 </html>

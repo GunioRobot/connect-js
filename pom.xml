@@ -1,7 +1,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.yahoo</groupId>
-	<artifactId>facebook-connect-js</artifactId>
+	<artifactId>gallery-fb-connect</artifactId>
 	<version>1.0-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
@@ -22,6 +22,10 @@
 					<include>**/*.js</include>
 					<include>**/*.css</include>
 				</includes>
+				<excludes>
+					<exclude>yui/add_open.js</exclude>
+					<exclude>yui/add_close.js</exclude>
+				</excludes>
 			</resource>
 		</resources>
 
@@ -36,14 +40,14 @@
 						<phase>generate-sources</phase>
 						<configuration>
 							<tasks>
+								<property name="js-filename" value="${project.build.directory}/generated-sources/${project.artifactId}.js" />
+								<property name="css-filename" value="${project.build.directory}/generated-sources/${project.artifactId}.css" />
+
 								<mkdir dir="${project.build.directory}/generated-sources/" />
 
 								<get src="http://developer.yahoo.com/yui/3/build/io/io.swf" dest="${project.build.directory}/generated-sources/" skipexisting="true" />
 
 								<filelist id="jsfiles" dir="${project.build.sourceDirectory}">
-								
-									<file name="yui/add_open.js" />
-									
 									<file name="third-party/json2.js" />
 
 									<file name="core/prelude.js" />
@@ -101,8 +105,6 @@
 									<file name="strings/en_US.js" />
 
 									<file name="yui/yui.js" />
-									
-									<file name="yui/add_close.js" />
 								</filelist>
 
 								<filelist id="cssfiles" dir="${project.build.sourceDirectory}">
@@ -117,11 +119,16 @@
 									<file name="css/social_bar_widget.css" />
 								</filelist>
 
-								<concat destfile="${project.build.directory}/generated-sources/all.js">
+								<echo file="${js-filename}">YUI.add("gallery-fb-connect", function ( Y ) {</echo>
+								<echo file="${js-filename}" append="true">${line.separator}</echo>
+								<concat destfile="${js-filename}" append="true">
 									<filelist refid="jsfiles" />
 								</concat>
+								<echo file="${js-filename}" append="true">${line.separator}</echo>
+								<echo file="${js-filename}" append="true">}, "${project.version}", {requires: "gallery-fb-connect-css"});</echo>
+								<echo file="${js-filename}" append="true">${line.separator}</echo>
 
-								<concat destfile="${project.build.directory}/generated-sources/all.css">
+								<concat destfile="${css-filename}">
 									<filelist refid="cssfiles" />
 								</concat>
 
@@ -203,17 +210,9 @@
 					</execution>
 				</executions>
 				<configuration>
-					<!--
-						<aggregations> <aggregation> <removeIncluded>true</removeIncluded> <insertNewLine>false</insertNewLine>
-						<output>${project.build.directory}/${project.build.finalName}-min.js</output> <includes> <include>classes/**/*-min.js</include> </includes> </aggregation>
-						<aggregation> <removeIncluded>true</removeIncluded> <insertNewLine>false</insertNewLine>
-						<output>${project.build.directory}/${project.build.finalName}.js</output> <includes> <include>classes/**/*.js</include> </includes> </aggregation>
-						<aggregation> <removeIncluded>true</removeIncluded> <insertNewLine>false</insertNewLine>
-						<output>${project.build.directory}/${project.build.finalName}-min.css</output> <includes> <include>classes/**/*-min.css</include> </includes>
-						</aggregation> <aggregation> <removeIncluded>true</removeIncluded> <insertNewLine>false</insertNewLine>
-						<output>${project.build.directory}/${project.build.finalName}.css</output> <includes> <include>classes/**/*.css</include> </includes> </aggregation>
-						</aggregations>
-					-->
+					<excludes>
+						<exclude>**/*.swf</exclude>
+					</excludes>
 				</configuration>
 			</plugin>
 		</plugins>
