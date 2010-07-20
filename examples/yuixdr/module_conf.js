@@ -44,7 +44,7 @@ var FB_INIT = {
 			appId : 130375173667364,
 			logging : true,
 			status : true,
-			cookie : true,
+			cookie : false,
 			xfbml : true,
 			channelUrl : "http://localhost:8888/examples/yuixdr/channelUrl.html"
 		},
