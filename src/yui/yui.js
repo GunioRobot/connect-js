@@ -140,8 +140,17 @@ FB.provide("YuiIo", {
 	}
 }, true);
 
-if (typeof Y.config.FB !== 'undefined') {
-	if (typeof Y.config.FB.init === 'object') {
-		FB.init(Y.config.FB.init);
-	}
-}
+Y.use('node-base', function(Y1) {
+	
+    var rootNode = Y1.one('#fb-root');
+    if (!rootNode) {
+        Y.one('body').append('<div id="fb-root"></div>');
+    }
+    
+    if (typeof Y.config.FB !== 'undefined') {
+        if (typeof Y.config.FB.init === 'object') {
+            FB.init(Y.config.FB.init);
+        }
+    }
+    
+});
