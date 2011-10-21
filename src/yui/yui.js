@@ -25,7 +25,7 @@
 
 /**
  * YUI context.
- * 
+ *
  * @class FB.YUI
  * @static
  * @access public
@@ -78,7 +78,7 @@ FB.provide("ApiServer", {
 FB.provide("YuiIo", {
 	/**
 	 * The onReady callbacks.
-	 * 
+	 *
 	 * @access private
 	 * @type Array
 	 */
@@ -107,7 +107,7 @@ FB.provide("YuiIo", {
 	},
 	/**
 	 * Register a function that needs to ensure YUI.io is ready.
-	 * 
+	 *
 	 * @access private
 	 * @param cb
 	 *            {Function} the function
@@ -141,16 +141,16 @@ FB.provide("YuiIo", {
 }, true);
 
 Y.use('node-base', function(Y1) {
-	
+
     var rootNode = Y1.one('#fb-root');
     if (!rootNode) {
         Y.one('body').append('<div id="fb-root"></div>');
     }
-    
+
     if (typeof Y.config.FB !== 'undefined') {
         if (typeof Y.config.FB.init === 'object') {
             FB.init(Y.config.FB.init);
         }
     }
-    
+
 });
